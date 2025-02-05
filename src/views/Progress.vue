@@ -70,7 +70,7 @@
         class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
         <NavButton label="View All" :to="'/'" :replace="true" />
-        <NavButton label="OnProgress" :to="'/Progress'" :replace="true" />
+        <NavButton label="OnProgress" :to="'/progress'" :replace="true" />
         <NavButton label="Closed" :to="'/closed'" :replace="true" />
       </div>
 
@@ -99,7 +99,7 @@
         />
       </div>
     </div>
-
+    <!-- Table Component  -->
     <TableComponent :headers="headers" :body-data="dataFad" :show-action="false" />
 
     <!-- Pagination Component -->
@@ -115,8 +115,8 @@
 
 <script setup>
 import TableComponent from '@/components/TableComponent.vue'
-import NavButton from '@/components/NavButton.vue'
 import Pagination from '@/components/Pagination.vue'
+import NavButton from '@/components/NavButton.vue'
 import { ref } from 'vue'
 
 const paginationOptions = ref([1, 2, 3, 4, 5])

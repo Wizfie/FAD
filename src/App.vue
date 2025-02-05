@@ -1,6 +1,6 @@
 <template>
   <div :class="{ dark: isDarkMode }">
-    <Navbar :toggleDarkMode="toggleDarkMode" />
+    <Navbar :isDarkMode="isDarkMode" :toggleDarkMode="toggleDarkMode" />
     <div class="min-h-screen bg-white dark:bg-gray-900">
       <router-view />
     </div>
