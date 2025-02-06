@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'homeView',
-      component: () => import('@/views/Home.vue'),
+      component: () => import('@/views/HomeFad.vue'),
     },
     {
       path: '/admin',
@@ -16,12 +16,17 @@ const router = createRouter({
     {
       path: '/progress',
       name: 'progressView',
-      component: () => import('@/views/Progress.vue'),
+      component: () => import('@/views/ProgressFad.vue'),
     },
     {
       path: '/closed',
       name: 'ClosedView',
-      component: () => import('@/views/Closed.vue'),
+      component: () => import('@/views/ClosedFad.vue'),
+    },
+    {
+      path: '/closed/statistic',
+      name: 'ClosedViewStat',
+      component: () => import('@/views/ClosedFadStat.vue'),
     },
   ],
 })

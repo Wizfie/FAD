@@ -67,12 +67,16 @@
         <!-- Vendor -->
         <div>
           <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Vendor</label>
-          <input
+          <select
             v-model="form.vendor"
-            type="text"
             required
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-          />
+          >
+            <option value="CV Bintang Berlian">CV Bintang Berlian</option>
+            <option value="PT Mitra Asia Tamajaya">PT Mitra Asia Tamajaya</option>
+            <option value="CV Putra Abadi">CV Putra Abadi</option>
+            <option value="CV Sinerga Mandiri Utama">CV Sinerga Mandiri Utama</option>
+          </select>
         </div>
 
         <!-- Status -->
@@ -84,8 +88,8 @@
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           >
             <option value="Open">Open</option>
-            <option value="Close">Closed</option>
-            <option value="On Progress">On Progress</option>
+            <option value="Closed">Closed</option>
+            <option value="OnProgress">On Progress</option>
           </select>
         </div>
         <!-- Deskripsi -->
