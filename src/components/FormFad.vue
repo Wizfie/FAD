@@ -3,7 +3,9 @@
     <!-- Form Header -->
     <div class="mb-6 border-b dark:border-gray-700">
       <div class="flex items-center gap-x-3">
-        <h3 class="text-lg font-semibold">{{ isEditMode ? 'Edit Data' : 'Add Data' }} FAD</h3>
+        <h3 class="text-lg font-semibold dark:text-white">
+          {{ isEditMode ? 'Edit Data' : 'Add Data' }} FAD
+        </h3>
         <span
           class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400"
         >
@@ -54,6 +56,7 @@
             <option value="LOG">LOG</option>
             <option value="HO">HO</option>
             <option value="ENG">ENG</option>
+            <option value="JQA">JQA</option>
             <option value="IT/EDP">IT/EDP</option>
           </select>
         </div>
