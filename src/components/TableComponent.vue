@@ -36,9 +36,12 @@
                   v-show="key !== 'id'"
                   class="px-4 py-4 text-sm dark:text-white whitespace-nowrap"
                   :class="{
-                    'bg-green-100 , ': key === 'status' && value.toLowerCase() === 'open',
-                    'bg-yellow-100': key === 'status' && value.toLowerCase() === 'onprogress',
-                    'bg-red-100': key === 'status' && value.toLowerCase() === 'closed',
+                    'bg-green-100 dark:text-green-300 dark:bg-transparent , ':
+                      key === 'status' && value.toLowerCase() === 'open',
+                    'bg-yellow-100 dark:text-yellow-300 dark:bg-transparent ':
+                      key === 'status' && value.toLowerCase() === 'onprogress',
+                    'bg-red-100 dark:text-red-300 dark:bg-transparent ':
+                      key === 'status' && value.toLowerCase() === 'closed',
                   }"
                 >
                   <div>{{ value }}</div>

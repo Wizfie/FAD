@@ -6,12 +6,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'homeView',
-      component: () => import('@/views/HomeFad.vue'),
+      component: () => import('@/views/ViewAll.vue'),
     },
     {
-      path: '/admin',
+      path: '/myadmin',
       name: 'adminView',
       component: () => import('@/views/Admin.vue'),
+    },
+    {
+      path: '/open',
+      name: 'openView',
+      component: () => import('@/views/OpenFad.vue'),
     },
     {
       path: '/progress',

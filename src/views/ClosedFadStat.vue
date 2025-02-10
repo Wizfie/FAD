@@ -19,7 +19,8 @@
         class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
         <NavButton label="View All" :to="'/'" :replace="true" />
-        <NavButton label="OnProgress" :to="'/Progress'" :replace="true" />
+        <NavButton label="Open" :to="'/open'" :replace="true" />
+        <NavButton label="OnProgress" :to="'/progress'" :replace="true" />
         <NavButton label="Closed" :to="'/closed'" :replace="true" />
         <NavButton label="Closed Statistik" :to="'/closed/statistic'" :replace="true" />
       </div>
@@ -28,16 +29,19 @@
     <!-- Tabel Baru: Statistik Vendor -->
     <div class="mt-6">
       <h3 class="text-lg font-medium text-gray-800 dark:text-white">
-        Statistik FAD Berdasarkan Vendor
+        Statistik FAD Berdasarkan Vendor dan Plant
       </h3>
-      <TableClosedStat :headers="headersVendor" :body-data="filteredData" />
+      <TableClosedStat
+        :headers-vendor="headersVendor"
+        :headers-plant="headersPlant"
+        :body-data="filteredData"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import FormFad from '@/components/FormFad.vue'
 import NavButton from '@/components/NavButton.vue'
 import axios from 'axios'
 import TableClosedStat from '@/components/TableClosedStat.vue'
@@ -52,7 +56,8 @@ const filteredData = computed(() => {
   })
 })
 
-const headersVendor = ['No', 'Vendor', 'Jumlah FAD Closed']
+const headersVendor = ['No', 'Vendor', ' FAD Closed']
+const headersPlant = ['No', 'Plant', ' FAD Closed']
 
 // Fetch Data
 const getData = async () => {
@@ -62,6 +67,7 @@ const getData = async () => {
       dataFad.value = response.data.map((item, index) => ({
         noFad: item.noFad,
         item: item.item,
+        plant: item.plant,
         terimaFad: item.terimaFad,
         terimaBbm: item.terimaBbm,
         vendor: item.vendor,
@@ -82,15 +88,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-/* Animasi slide-in */
-.transform {
-  transition: transform 0.3s ease-in-out;
-}
-.translate-x-0 {
-  transform: translateX(0);
-}
-.translate-x-full {
-  transform: translateX(100%);
-}
-</style>
+<style scoped></style>

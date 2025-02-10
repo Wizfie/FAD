@@ -19,6 +19,7 @@
         class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
         <NavButton label="View All" :to="'/'" :replace="true" />
+        <NavButton label="Open" :to="'/Open'" :replace="true" />
         <NavButton label="OnProgress" :to="'/Progress'" :replace="true" />
         <NavButton label="Closed" :to="'/closed'" :replace="true" />
       </div>
@@ -126,6 +127,7 @@ const filteredData = computed(() => {
 const inputData = ref({
   noFad: '',
   item: '',
+  plant: '',
   terimaFad: '',
   terimaBbm: '',
   vendor: '',
@@ -139,6 +141,7 @@ const headers = [
   'NO',
   'No FAD',
   'Item',
+  'Plant',
   'Terima FAD',
   'Terima BBM',
   'Vendor',
@@ -183,6 +186,7 @@ const getData = async () => {
       dataFad.value = response.data.map((item) => ({
         noFad: item.noFad,
         item: item.item,
+        plant: item.plant,
         terimaFad: item.terimaFad,
         terimaBbm: item.terimaBbm,
         vendor: item.vendor,

@@ -66,6 +66,12 @@
 
     <!-- Search dan Tabel -->
     <div class="mt-6 md:flex md:items-center md:justify-between">
+      <!-- <div class="NavButton">
+        <NavButton label="Open" :to="'/open'" :replace="true" />
+        <NavButton label="OnProgress" :to="'/progress'" :replace="true" />
+        <NavButton label="Closed" :to="'/closed'" :replace="true" />
+        <NavButton label="Closed Statistik" :to="'/closed/statistic'" :replace="true" />
+      </div> -->
       <div class="relative flex items-center mt-4 md:mt-0">
         <span class="absolute">
           <svg
@@ -141,6 +147,7 @@ import TableComponent from '@/components/TableComponent.vue'
 import FormFad from '@/components/FormFad.vue'
 import Pagination from '@/components/Pagination.vue'
 import axios from 'axios'
+import NavButton from '@/components/NavButton.vue'
 
 const isFormOpen = ref(false)
 const isEditMode = ref(false)
@@ -170,6 +177,7 @@ const filteredData = computed(() => {
 const inputData = ref({
   noFad: '',
   item: '',
+  plant: '',
   terimaFad: '',
   terimaBbm: '',
   vendor: '',
@@ -184,6 +192,7 @@ const resetForm = () => {
   inputData.value = {
     noFad: '',
     item: '',
+    plant: '',
     terimaFad: '',
     terimaBbm: '',
     vendor: '',
@@ -200,6 +209,7 @@ const editRow = (row) => {
   inputData.value = {
     noFad: row['noFad'],
     item: row.item,
+    plant: row.plant,
     terimaFad: row['terimaFad'],
     terimaBbm: row['terimaBbm'],
     vendor: row.vendor,
@@ -219,6 +229,7 @@ const headers = [
   'NO',
   'No FAD',
   'Item',
+  'Plant',
   'Terima FAD',
   'Terima BBM',
   'Vendor',
@@ -263,6 +274,7 @@ const getData = async () => {
       dataFad.value = response.data.map((item) => ({
         noFad: item.noFad,
         item: item.item,
+        plant: item.plant,
         terimaFad: item.terimaFad,
         terimaBbm: item.terimaBbm,
         vendor: item.vendor,
