@@ -1,6 +1,6 @@
 <template>
   <!-- Vendor -->
-  <div class="flex flex-row gap-2 mt-6">
+  <div class="flex flex-col md:flex-row gap-2 mt-6">
     <div class="-mx-4 -my-2 w-full overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 md:px-6 lg:px-8">
         <div class="flex overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">

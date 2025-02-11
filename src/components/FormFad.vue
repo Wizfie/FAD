@@ -51,6 +51,7 @@
             <option value="A/C">A/C</option>
             <option value="BHI">BHI</option>
             <option value="DK">DK</option>
+            <option value="E">E</option>
             <option value="M">M</option>
             <option value="TBR">TBR</option>
             <option value="LOG">LOG</option>
