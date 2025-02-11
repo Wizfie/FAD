@@ -3,7 +3,9 @@
     <!-- Form Header -->
     <div class="mb-6 border-b dark:border-gray-700">
       <div class="flex items-center gap-x-3">
-        <h3 class="text-lg font-semibold">{{ isEditMode ? 'Edit Data' : 'Add Data' }} FAD</h3>
+        <h3 class="text-lg font-semibold dark:text-white">
+          {{ isEditMode ? 'Edit Data' : 'Add Data' }} FAD
+        </h3>
         <span
           class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400"
         >
@@ -37,6 +39,27 @@
             placeholder="Nama Item"
             required
           />
+        </div>
+        <!-- Plant -->
+        <div>
+          <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Plant</label>
+          <select
+            v-model="form.plant"
+            required
+            class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          >
+            <option value="A/C">A/C</option>
+            <option value="BHI">BHI</option>
+            <option value="DK">DK</option>
+            <option value="E">E</option>
+            <option value="M">M</option>
+            <option value="TBR">TBR</option>
+            <option value="LOG">LOG</option>
+            <option value="HO">HO</option>
+            <option value="ENG">ENG</option>
+            <option value="JQA">JQA</option>
+            <option value="IT/EDP">IT/EDP</option>
+          </select>
         </div>
 
         <!-- Terima FAD -->
@@ -76,6 +99,7 @@
             <option value="PT Mitra Asia Tamajaya">PT Mitra Asia Tamajaya</option>
             <option value="CV Putra Abadi">CV Putra Abadi</option>
             <option value="CV Sinerga Mandiri Utama">CV Sinerga Mandiri Utama</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
@@ -153,6 +177,7 @@ const props = defineProps({
     default: () => ({
       noFad: '',
       item: '',
+      plant: '',
       terimaFad: '',
       terimaBbm: '',
       vendor: '',
@@ -174,6 +199,7 @@ const resetForm = () => {
   form.value = {
     noFad: '',
     item: '',
+    plant: '',
     terimaFad: '',
     terimaBbm: '',
     vendor: '',

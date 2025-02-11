@@ -51,7 +51,7 @@
 
     <!-- Table Component -->
     <TableComponent
-      :headers="headers"
+      :headers="headersFad"
       :body-data="filteredData"
       :current-page="currentPage"
       :items-per-page="itemsPerPage"
@@ -105,9 +105,9 @@ const isEditMode = ref(false)
 
 const dataFad = ref([])
 const currentPage = ref(1) // Halaman aktif
-const itemsPerPage = 10
+const itemsPerPage = 5
 const searchQuery = ref('')
-const progress = ref('OnProgress')
+const Open = ref('Open')
 const totalPages = computed(() => Math.ceil(filteredData.value.length / itemsPerPage))
 
 // Filter data berdasarkan pencarian
@@ -116,7 +116,7 @@ const filteredData = computed(() => {
   if (searchQuery.value) {
     return dataFad.value.filter((item) => {
       return (
-        item.status.toLowerCase() === progress.value.toLowerCase() &&
+        item.status.toLowerCase() == Open.value.toLowerCase() &&
         (item.noFad.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
           item.item.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
           item.vendor.toLowerCase().includes(searchQuery.value.toLowerCase()))
@@ -126,28 +126,15 @@ const filteredData = computed(() => {
 
   // Jika tidak ada search query, hanya tampilkan data dengan status OnProgress
   return dataFad.value.filter((item) => {
-    return item.status.toLowerCase() === progress.value.toLowerCase()
+    return item.status.toLowerCase() === Open.value.toLowerCase()
   })
 })
 
-const inputData = ref({
-  noFad: '',
-  item: '',
-  plant: '',
-  terimaFad: '',
-  terimaBbm: '',
-  vendor: '',
-  status: '',
-  deskripsi: '',
-  keterangan: '',
-  id: '',
-})
-
-const headers = [
+const headersFad = [
   'NO',
   'No FAD',
   'Item',
-  'Plant',
+  'plant',
   'Terima FAD',
   'Terima BBM',
   'Vendor',

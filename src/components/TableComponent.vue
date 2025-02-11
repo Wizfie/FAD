@@ -25,7 +25,6 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
               <tr v-for="(row, index) in paginatedData" :key="index">
-                <!-- Menambahkan kolom untuk nomor index -->
                 <td class="px-4 py-4 text-sm dark:text-white whitespace-nowrap">
                   {{ indexNumber(row, index) }}
                 </td>
@@ -34,11 +33,15 @@
                   v-for="(value, key) in row"
                   :key="key"
                   v-show="key !== 'id'"
-                  class="px-4 py-4 text-sm dark:text-white whitespace-nowrap"
+                  class="px-4 py-4 text-sm whitespace-nowrap"
                   :class="{
-                    'bg-green-100 , ': key === 'status' && value.toLowerCase() === 'open',
-                    'bg-yellow-100': key === 'status' && value.toLowerCase() === 'onprogress',
-                    'bg-red-100': key === 'status' && value.toLowerCase() === 'closed',
+                    'bg-green-100 text-black  dark:text-green-300  dark:bg-transparent':
+                      key === 'status' && value.toLowerCase() === 'open',
+                    'bg-yellow-100 text-black dark:text-yellow-300 dark:bg-transparent':
+                      key === 'status' && value.toLowerCase() === 'onprogress',
+                    'bg-red-100 text-black dark:text-red-300 dark:bg-transparent':
+                      key === 'status' && value.toLowerCase() === 'closed',
+                    'text-black dark:text-white': key !== 'status',
                   }"
                 >
                   <div>{{ value }}</div>
