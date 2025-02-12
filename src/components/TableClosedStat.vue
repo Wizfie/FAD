@@ -84,7 +84,7 @@
               <tr class="font-bold bg-gray-100 dark:bg-gray-800">
                 <td colspan="2" class="px-4 py-4 text-sm dark:text-white text-center">Total</td>
                 <td class="px-4 py-4 text-sm dark:text-white">
-                  {{ totalVendor }}
+                  {{ totalPlant }}
                   <!-- Total jumlah item -->
                 </td>
               </tr>
@@ -115,12 +115,19 @@ const groupedVendor = computed(() => {
     return groups
   }, {})
 })
+// Mengelompokkan data berdasarkan plant, mempertimbangkan duplikat noFad
 const groupedPlant = computed(() => {
+  const seenFad = new Set() // Menyimpan noFad yang sudah diproses
   return props.bodyData.reduce((groups, item) => {
-    if (!groups[item.plant]) {
-      groups[item.plant] = []
+    // Memeriksa jika noFad sudah ada, jika ya, abaikan item
+    if (!seenFad.has(item.noFad)) {
+      seenFad.add(item.noFad)
+      if (!groups[item.plant]) {
+        groups[item.plant] = []
+      }
+      groups[item.plant].push(item)
     }
-    groups[item.plant].push(item)
+
     return groups
   }, {})
 })
@@ -131,9 +138,13 @@ const totalVendor = computed(() => {
     return total + group.length
   }, 0)
 })
+
+// Menghitung total jumlah item dari semua plant, hanya menghitung data unik berdasarkan noFad
 const totalPlant = computed(() => {
-  return Object.values(groupedVendor.value).reduce((total, group) => {
-    return total + group.length
+  return Object.values(groupedPlant.value).reduce((total, group) => {
+    // Membuat set untuk menghitung noFad yang unik dalam setiap grup
+    const uniqueFads = new Set(group.map((item) => item.noFad))
+    return total + uniqueFads.size
   }, 0)
 })
 </script>
