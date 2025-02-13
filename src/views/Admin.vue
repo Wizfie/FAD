@@ -159,20 +159,56 @@ const itemsPerPage = 10
 const searchQuery = ref('')
 const totalPages = computed(() => Math.ceil(filteredData.value.length / itemsPerPage))
 
-// Filter data berdasarkan pencarian
+// Menentukan apakah input adalah angka
+const isNumber = (str) => {
+  return !isNaN(str)
+}
+
+// Menentukan apakah input adalah tanggal
+const isDate = (str) => {
+  const regex = /^\d{4}-\d{2}-\d{2}$/ // Format tanggal: YYYY-MM-DD
+  return regex.test(str)
+}
+
 const filteredData = computed(() => {
   if (!searchQuery.value) {
     return dataFad.value
   }
+
+  const query = searchQuery.value.toLowerCase()
+
+  // Pencarian spesifik berdasarkan format
+  if (isDate(query)) {
+    // Jika input adalah tanggal, filter berdasarkan kolom terimaFad atau terimaBbm
+    return dataFad.value.filter((item) => {
+      return (
+        (item.terimaFad && item.terimaFad.includes(query)) ||
+        (item.terimaBbm && item.terimaBbm.includes(query))
+      )
+    })
+  }
+
+  // Jika input adalah angka, hanya filter berdasarkan kolom noFad
+  if (isNumber(query)) {
+    return dataFad.value.filter((item) => item.noFad.toString().includes(query))
+  }
+
+  // Filter berdasarkan teks di semua kolom, memastikan tidak ada duplikasi data
   return dataFad.value.filter((item) => {
-    return (
-      item['noFad'].toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.item.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.vendor.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
- 	item.terimaFad.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
- 	item.terimaBbm.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.status.toLowerCase().includes(searchQuery.value.toLowerCase())
-    )
+    const matchedFields = [
+      item.noFad.toLowerCase(),
+      item.plant.toLowerCase(),
+      item.item.toLowerCase(),
+      item.terimaFad.toLowerCase(),
+      item.terimaBbm.toLowerCase(),
+      item.vendor.toLowerCase(),
+      item.status.toLowerCase(),
+      item.deskripsi.toLowerCase(),
+      item.keterangan.toLowerCase(),
+    ]
+
+    // Jika ada kecocokan pada salah satu kolom, return item ini
+    return matchedFields.some((field) => field.includes(query))
   })
 })
 
