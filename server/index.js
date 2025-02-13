@@ -5,10 +5,10 @@ import cors from 'cors' // Mengimpor CORS
 import dataRoutes from '../server/routes/dataRoutes.js'
 
 const app = express()
-const port = 5000
+const port = 5001
 
 // Daftar origins yang diizinkan
-const allowedOrigins = ['http://localhost:3000']
+const allowedOrigins = ['http://localhost:3001',"http://10.129.48.138:3001",'http://fad-grm.local:3001']
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -39,5 +39,5 @@ app.get('/api', (req, res) => {
 app.use('/api', dataRoutes)
 
 app.listen(port, () => {
-  console.log('Server Running in port 5000')
+  console.log('Server Running in port 5001')
 })

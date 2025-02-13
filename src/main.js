@@ -7,11 +7,11 @@ import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
-// Konfigurasi Axios langsung di sini
 
 // Menambahkan Axios instance ke global properties
-axios.defaults.baseURL = 'http://localhost:5000'
-app.use(createPinia())
+const baseURL = import.meta.env.VITE_API_BASE_URL_IP;
+axios.defaults.baseURL = baseURL;
+app.use(createPinia)
 app.use(router)
 
 app.mount('#app')

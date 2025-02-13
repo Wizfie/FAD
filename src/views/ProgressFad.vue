@@ -118,6 +118,7 @@ const filteredData = computed(() => {
       return (
         item.status.toLowerCase() === progress.value.toLowerCase() &&
         (item.noFad.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+item.plant.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
           item.item.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
           item.vendor.toLowerCase().includes(searchQuery.value.toLowerCase()))
       )

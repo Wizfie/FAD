@@ -112,6 +112,7 @@ const groupedVendor = computed(() => {
       groups[item.vendor] = []
     }
     groups[item.vendor].push(item)
+console.log("VENDOR" + groups)
     return groups
   }, {})
 })
@@ -127,7 +128,7 @@ const groupedPlant = computed(() => {
       }
       groups[item.plant].push(item)
     }
-
+	console.log("PLANT" + groups)
     return groups
   }, {})
 })

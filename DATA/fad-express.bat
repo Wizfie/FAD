@@ -1,7 +1,7 @@
 
-echo  [%DATE% %TIME%] Starting Express project... >> "C:\Users\wizfi\OneDrive\Desktop\log.txt"
+echo  [%DATE% %TIME%] Starting Express project... >> "D:\Wisfie\Project FAD\DataFad\log.txt"
 D:
-cd "D:\Project\2024\FAD\server"
+cd "D:\Wisfie\Project FAD\FAD\server"
 npm run dev 
-start /B npm run dev >> "C:\Users\wizfi\OneDrive\Desktop\log.txt" 
-echo [%DATE% %TIME%] Express run port 5000 >> "C:\Users\wizfi\OneDrive\Desktop\log.txt"
+start /B npm run dev >> "D:\Wisfie\Project FAD\DataFad\log.txt" 
+echo [%DATE% %TIME%] Express run port 5000 >> "D:\Wisfie\Project FAD\DataFad\log.txt"

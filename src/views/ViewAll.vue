@@ -105,7 +105,7 @@ const isEditMode = ref(false)
 
 const dataFad = ref([])
 const currentPage = ref(1) // Halaman aktif
-const itemsPerPage = 5
+const itemsPerPage = 10
 const searchQuery = ref('')
 const totalPages = computed(() => Math.ceil(filteredData.value.length / itemsPerPage))
 
@@ -117,9 +117,11 @@ const filteredData = computed(() => {
   return dataFad.value.filter((item) => {
     return (
       item['noFad'].toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+	item.plant.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.item.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.vendor.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.status.toLowerCase().includes(searchQuery.value.toLowerCase())
+      item.status.toLowerCase().includes(searchQuery.value.toLowerCase()) 
+	
     )
   })
 })

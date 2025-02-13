@@ -2,7 +2,8 @@ import fs from 'fs/promises'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid' // Import UUID
 
-const folderPath = 'C:\\MyLocal\\Data'
+const folderPath = 'D:\\Wisfie\\Project FAD\\DataFad'
+
 const filePath = path.join(folderPath, 'dataFad.json')
 
 // Simpan file ke JSON

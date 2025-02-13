@@ -1,8 +1,7 @@
-@echo off
-echo [%DATE% %TIME%] Starting Vue project... >> "C:\Users\wizfi\OneDrive\Desktop\log.txt"
+
+echo  [%DATE% %TIME%] Starting Express project... >> "D:\Wisfie\Project FAD\DataFad\log.txt"
 D:
-cd "D:\Project\2024\FAD"
-start /B npm run dev 
-echo [%DATE% %TIME%] Vue Run in port 3000. >> "C:\Users\wizfi\OneDrive\Desktop\log.txt"
-
-
+cd "D:\Wisfie\Project FAD\FAD"
+npm run dev 
+start /B npm run dev >> "D:\Wisfie\Project FAD\DataFad\log.txt" 
+echo [%DATE% %TIME%] Express run port 5000 >> "D:\Wisfie\Project FAD\DataFad\log.txt"

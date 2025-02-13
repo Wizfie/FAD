@@ -169,6 +169,8 @@ const filteredData = computed(() => {
       item['noFad'].toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.item.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.vendor.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+ 	item.terimaFad.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+ 	item.terimaBbm.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.status.toLowerCase().includes(searchQuery.value.toLowerCase())
     )
   })

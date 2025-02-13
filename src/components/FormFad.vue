@@ -52,12 +52,16 @@
             <option value="BHI">BHI</option>
             <option value="DK">DK</option>
             <option value="E">E</option>
-            <option value="M">M</option>
+            <option value="Mixing">Mixing</option>
             <option value="TBR">TBR</option>
             <option value="LOG">LOG</option>
             <option value="HO">HO</option>
             <option value="ENG">ENG</option>
+<<<<<<< Updated upstream
             <option value="JQA">JQA</option>
+=======
+
+>>>>>>> Stashed changes
             <option value="IT/EDP">IT/EDP</option>
           </select>
         </div>
@@ -70,7 +74,7 @@
           <input
             v-model="form.terimaFad"
             type="date"
-            required
+            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           />
         </div>
@@ -82,7 +86,7 @@
           <input
             v-model="form.terimaBbm"
             type="date"
-            required
+            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           />
         </div>
@@ -92,7 +96,7 @@
           <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Vendor</label>
           <select
             v-model="form.vendor"
-            required
+            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           >
             <option value="CV Bintang Berlian">CV Bintang Berlian</option>
@@ -232,8 +236,12 @@ const toggleForm = () => {
     form.value = { ...props.initData }
   }
 }
+const trimInput = (key) => {
+  form.value[key] = form.value[key].trim()
+}
 
 const handleSubmit = () => {
+  Object.keys(form.value).forEach((key) => trimInput(key))
   emit('submitForm', form.value)
   if (!props.isEditMode) {
     resetForm()

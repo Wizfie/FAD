@@ -33,7 +33,7 @@
                   v-for="(value, key) in row"
                   :key="key"
                   v-show="key !== 'id'"
-                  class="px-4 py-4 text-sm whitespace-nowrap"
+                  class="px-4 py-4 text-sm text-wrap"
                   :class="{
                     'bg-green-100 text-black  dark:text-green-300  dark:bg-transparent':
                       key === 'status' && value.toLowerCase() === 'open',
@@ -44,7 +44,7 @@
                     'text-black dark:text-white': key !== 'status',
                   }"
                 >
-                  <div>{{ value }}</div>
+                  <div>{{ value ? value : '-' }}</div>
                 </td>
 
                 <td v-if="showAction" class="px-4 py-4 text-sm whitespace-nowrap">

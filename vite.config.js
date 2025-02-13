@@ -7,8 +7,9 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: true,
-    port: 3000,
-    proxy: 'http://localhost:5000',
+    port: 3001,
+    proxy: 'http://localhost:5001',
+    allowedHosts: ['10.129.48.138', 'localhost',"fad-grm.local"]
   },
 
   resolve: {
