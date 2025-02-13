@@ -8,7 +8,11 @@ const app = express()
 const port = 5001
 
 // Daftar origins yang diizinkan
-const allowedOrigins = ['http://localhost:3001',"http://10.129.48.138:3001",'http://fad-grm.local:3001']
+const allowedOrigins = [
+  'http://localhost:3001',
+  'http://10.129.48.138:3001',
+  'http://fad-grm.local:3001',
+]
 
 const corsOptions = {
   origin: function (origin, callback) {
