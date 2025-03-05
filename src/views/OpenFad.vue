@@ -18,10 +18,7 @@
       <div
         class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
-        <NavButton label="View All" :to="'/'" :replace="true" />
-        <NavButton label="Open" :to="'/open'" :replace="true" />
-        <NavButton label="OnProgress" :to="'/progress'" :replace="true" />
-        <NavButton label="Closed" :to="'/closed'" :replace="true" />
+        <NavGroup />
       </div>
       <div class="relative flex items-center mt-4 md:mt-0">
         <span class="absolute">
@@ -97,17 +94,19 @@ import { ref, onMounted, computed } from 'vue'
 import TableComponent from '@/components/TableComponent.vue'
 import FormFad from '@/components/FormFad.vue'
 import Pagination from '@/components/Pagination.vue'
-import NavButton from '@/components/NavButton.vue'
 import axios from 'axios'
+import NavGroup from '@/components/NavGroup.vue'
+import { useRoute } from 'vue-router'
 
 const isFormOpen = ref(false)
 const isEditMode = ref(false)
+const route = useRoute()
 
 const dataFad = ref([])
 const currentPage = ref(1) // Halaman aktif
 const itemsPerPage = 10
-const searchQuery = ref('')
-const Open = ref('open')
+const searchQuery = ref(route.query.q ? route.query.q : '')
+const open = ref('open')
 const totalPages = computed(() => Math.ceil(filteredData.value.length / itemsPerPage))
 
 // Menentukan apakah input adalah angka
@@ -124,7 +123,7 @@ const isDate = (str) => {
 const filteredData = computed(() => {
   // Jika tidak ada query pencarian, hanya tampilkan data dengan status 'OnProgress'
   if (!searchQuery.value) {
-    return dataFad.value.filter((item) => item.status.toLowerCase() === Open.value)
+    return dataFad.value.filter((item) => item.status.toLowerCase() === open.value)
   }
 
   const query = searchQuery.value.toLowerCase()
@@ -160,7 +159,10 @@ const filteredData = computed(() => {
     ]
 
     // Jika ada kecocokan pada salah satu kolom, return item ini
-    return matchedFields.some((field) => field.includes(query))
+    return (
+      matchedFields.some((field) => field.includes(query)) &&
+      item.status.toLowerCase() === open.value
+    )
   })
 })
 

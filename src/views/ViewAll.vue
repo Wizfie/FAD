@@ -18,10 +18,7 @@
       <div
         class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
-        <NavButton label="View All" :to="'/'" :replace="true" />
-        <NavButton label="Open" :to="'/Open'" :replace="true" />
-        <NavButton label="OnProgress" :to="'/Progress'" :replace="true" />
-        <NavButton label="Closed" :to="'/closed'" :replace="true" />
+        <NavGroup />
       </div>
       <div class="relative flex items-center mt-4 md:mt-0">
         <span class="absolute">
@@ -97,8 +94,8 @@ import { ref, onMounted, computed } from 'vue'
 import TableComponent from '@/components/TableComponent.vue'
 import FormFad from '@/components/FormFad.vue'
 import Pagination from '@/components/Pagination.vue'
-import NavButton from '@/components/NavButton.vue'
 import axios from 'axios'
+import NavGroup from '@/components/NavGroup.vue'
 
 const isFormOpen = ref(false)
 const isEditMode = ref(false)

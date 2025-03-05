@@ -5,6 +5,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'dashboard',
+      component: () => import('@/views/Dashboard.vue'),
+    },
+    {
+      path: '/all',
       name: 'homeView',
       component: () => import('@/views/ViewAll.vue'),
     },
@@ -19,7 +24,7 @@ const router = createRouter({
       component: () => import('@/views/OpenFad.vue'),
     },
     {
-      path: '/progress',
+      path: '/onprogress',
       name: 'progressView',
       component: () => import('@/views/ProgressFad.vue'),
     },
@@ -27,11 +32,6 @@ const router = createRouter({
       path: '/closed',
       name: 'ClosedView',
       component: () => import('@/views/ClosedFad.vue'),
-    },
-    {
-      path: '/closed/statistic',
-      name: 'ClosedViewStat',
-      component: () => import('@/views/ClosedFadStat.vue'),
     },
   ],
 })

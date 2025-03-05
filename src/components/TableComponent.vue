@@ -39,7 +39,7 @@
                       key === 'status' && value.toLowerCase() === 'open',
                     'bg-yellow-100 text-black dark:text-yellow-300 dark:bg-transparent':
                       key === 'status' && value.toLowerCase() === 'onprogress',
-                    'bg-red-100 text-black dark:text-red-300 dark:bg-transparent':
+                    'bg-slate-100 text-black dark:text-slate-300 dark:bg-transparent':
                       key === 'status' && value.toLowerCase() === 'closed',
                     'text-black dark:text-white': key !== 'status',
                   }"

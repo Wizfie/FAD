@@ -11,7 +11,7 @@
                   v-for="(header, index) in headersVendor"
                   :key="index"
                   scope="col"
-                  class="py-3.5 px-4 text-sm font-normal text-gray-500 dark:text-gray-400"
+                  class="py-3.5 px-4 text-md font-semibold text-gray-900 dark:text-white"
                 >
                   <span>{{ header }}</span>
                 </th>
@@ -58,7 +58,7 @@
                   v-for="(header, index) in headersPlant"
                   :key="index"
                   scope="col"
-                  class="py-3.5 px-4 text-sm font-normal text-gray-500 dark:text-gray-400"
+                  class="py-3.5 px-4 text-md font-semibold text-gray-900 dark:text-white"
                 >
                   <span>{{ header }}</span>
                 </th>
@@ -112,7 +112,7 @@ const groupedVendor = computed(() => {
       groups[item.vendor] = []
     }
     groups[item.vendor].push(item)
-console.log("VENDOR" + groups)
+    console.log('VENDOR' + groups)
     return groups
   }, {})
 })
@@ -128,7 +128,7 @@ const groupedPlant = computed(() => {
       }
       groups[item.plant].push(item)
     }
-	console.log("PLANT" + groups)
+    console.log('PLANT' + groups)
     return groups
   }, {})
 })
