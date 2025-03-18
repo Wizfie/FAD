@@ -2,6 +2,8 @@ import 'module-alias/register.js'
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors' // Mengimpor CORS
+import path from 'path'
+import fs from 'fs'
 import dataRoutes from '../server/routes/dataRoutes.js'
 
 const app = express()
@@ -33,10 +35,19 @@ app.use(bodyParser.json()) // Middleware untuk parsing JSON
 app.use(express.json()) // Middleware untuk parsing JSON
 
 // Endpoint untuk testing
-app.get('/api', (req, res) => {
-  res.json({
-    message: 'Hello Express',
-  })
+
+const folderPath = 'C:\\MyLocal\\Data\\DataFad'
+const filePathGuide = path.join(folderPath, 'Guide.pdf')
+
+app.get('/userguide', async (req, res) => {
+  try {
+    const data = await fs.promises.readFile(filePathGuide)
+    res.contentType('application/pdf')
+    res.send(data)
+  } catch (err) {
+    console.log('Gagal membaca file panduan pengguna', err)
+    res.status(500).send({ message: 'Gagal membaca file panduan pengguna', error: err.message })
+  }
 })
 
 // Menggunakan routes untuk data

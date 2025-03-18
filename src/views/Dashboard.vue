@@ -19,6 +19,14 @@
       >
         <NavGroup />
       </div>
+      <div>
+        <button
+          @click="openUserGuide"
+          class="px-3 py-2 border border-blue-300 rounded-md font-medium hover:bg-blue-400 dark:text-white"
+        >
+          User Guide
+        </button>
+      </div>
     </div>
 
     <!-- Kanban Columns -->
@@ -125,6 +133,7 @@ import axios from 'axios'
 import NavGroup from '@/components/NavGroup.vue'
 import { useRouter } from 'vue-router'
 import TableClosedStat from '@/components/TableClosedStat.vue'
+import { env } from 'process'
 
 const router = useRouter()
 const dataFad = ref([])
@@ -229,6 +238,13 @@ const isPlantAccordionOpen = (status, plant) => {
 const redirectToSearch = (status, noFad) => {
   const path = `/${status.toLowerCase()}`
   router.push({ path, query: { q: noFad } })
+}
+
+const openUserGuide = () => {
+  const userGuideUrl = import.meta.env.VITE_BASE_URL_IP
+
+  // Membuka PDF di tab baru
+  window.open(userGuideUrl, '_blank')
 }
 
 // Ambil data saat komponen dimuat
