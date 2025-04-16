@@ -4,6 +4,11 @@ import {
   getDataHandler,
   updateDataHandler,
   deleteDataHandler,
+  saveControllerVendor,
+  updateControllerVendor,
+  getControllerVendor,
+  deleteControllerVendor,
+  getLastUpdateHandler,
 } from '../controllers/dataController.js'
 
 const router = express.Router()
@@ -19,5 +24,16 @@ router.put('/v1/update-fad/:id', updateDataHandler)
 
 // Rute untuk menghapus data berdasarkan ID
 router.delete('/v1/delete-fad/:id', deleteDataHandler)
+
+// Router Vendor
+router.post('/v1/save-vendor', saveControllerVendor)
+
+router.put('/v1/update-vendor/:id', updateControllerVendor)
+
+router.get('/v1/get-vendor', getControllerVendor)
+
+router.delete('/v1/delete-vendor/:id', deleteControllerVendor)
+
+router.get('/v1/get-log-update', getLastUpdateHandler)
 
 export default router

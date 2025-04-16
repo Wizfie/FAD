@@ -51,17 +51,13 @@
             <option value="A/C">A/C</option>
             <option value="BHI">BHI</option>
             <option value="DK">DK</option>
-            <option value="E">E</option>
-            <option value="Mixing">Mixing</option>
+            <option value="Mixing/E">Mixing/E</option>
             <option value="TBR">TBR</option>
             <option value="LOG">LOG</option>
             <option value="HO">HO</option>
             <option value="ENG">ENG</option>
-<<<<<<< Updated upstream
             <option value="JQA">JQA</option>
-=======
-
->>>>>>> Stashed changes
+            <option value="GA">GA</option>
             <option value="IT/EDP">IT/EDP</option>
           </select>
         </div>
@@ -74,7 +70,6 @@
           <input
             v-model="form.terimaFad"
             type="date"
-            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           />
         </div>
@@ -86,7 +81,6 @@
           <input
             v-model="form.terimaBbm"
             type="date"
-            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           />
         </div>
@@ -96,14 +90,11 @@
           <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Vendor</label>
           <select
             v-model="form.vendor"
-            
             class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           >
-            <option value="CV Bintang Berlian">CV Bintang Berlian</option>
-            <option value="PT Mitra Asia Tamajaya">PT Mitra Asia Tamajaya</option>
-            <option value="CV Putra Abadi">CV Putra Abadi</option>
-            <option value="CV Sinerga Mandiri Utama">CV Sinerga Mandiri Utama</option>
-            <option value="Other">Other</option>
+            <option v-for="vendor in vendors" :key="vendor.id" :value="vendor.name">
+              {{ vendor.name }}
+            </option>
           </select>
         </div>
 
@@ -121,15 +112,13 @@
           </select>
         </div>
         <!-- Deskripsi -->
-        <div>
-          <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Deskripsi</label>
-          <input
-            v-model="form.deskripsi"
-            type="text"
-            class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Deskripsi"
-          />
-        </div>
+        <label class="block mb-2 text-sm text-gray-700 dark:text-gray-300">Deskripsi</label>
+        <textarea
+          v-model="form.deskripsi"
+          rows="3"
+          class="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          placeholder="Deskripsi"
+        ></textarea>
       </div>
       <!-- Keterangan -->
       <div>
@@ -174,7 +163,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import axios from 'axios'
+
 const props = defineProps({
   initData: {
     type: Object,
@@ -247,6 +238,23 @@ const handleSubmit = () => {
     resetForm()
   }
 }
+
+const vendors = ref([])
+
+// Ambil data vendor dari backend
+const fetchVendors = async () => {
+  try {
+    const response = await axios.get('/api/v1/get-vendor')
+    vendors.value = response.data.filter((vendor) => vendor.active) // Hanya vendor aktif
+  } catch (error) {
+    console.error('Gagal mengambil data vendor:', error)
+  }
+}
+
+// Ambil data vendor saat komponen dimuat
+onMounted(() => {
+  fetchVendors()
+})
 </script>
 
 <style scoped>

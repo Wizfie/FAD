@@ -1,0 +1,22 @@
+[
+  {
+    "name": "CV Bintang Berlian",
+    "active": true,
+    "id": "2dba28c9-76d6-4e87-aeda-15a0700dd7d9"
+  },
+  {
+    "name": "PT Mitra Asia Tamajaya",
+    "active": true,
+    "id": "d82ccc74-f4b4-4259-a430-d9a52fda7836"
+  },
+  {
+    "name": "CV Putra Abadi",
+    "active": true,
+    "id": "d5bb9e5b-2af8-4e56-845f-9b02d9034dc1"
+  },
+  {
+    "name": "CV Sinerga Mandiri Utama",
+    "active": true,
+    "id": "ab0eb44f-7b0a-486a-90d5-bd6b5e1ac78a"
+  }
+]

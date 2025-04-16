@@ -13,20 +13,33 @@
       </div>
     </div>
 
-    <div class="mt-6 md:flex md:items-center md:justify-between">
+    <div class="my-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div
-        class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
+        class="flex flex-wrap overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700"
       >
         <NavGroup />
       </div>
-      <div>
+      <div class="flex justify-center md:justify-end">
         <button
           @click="openUserGuide"
-          class="px-3 py-2 border border-blue-300 rounded-md font-medium hover:bg-blue-400 dark:text-white"
+          class="px-4 py-2 border border-blue-300 rounded-md font-medium hover:bg-blue-400 dark:text-white"
         >
           User Guide
         </button>
       </div>
+    </div>
+
+    <div>
+      <h3 class="mt-2 text-lg font-semibold">Last Update</h3>
+      <template v-if="lastUpdateData">
+        <strong class="font-semibold text-gray-500 dark:text-gray-400">
+          {{
+            lastUpdateData.lastUpdate.timestamp
+              ? new Date(lastUpdateData.lastUpdate.timestamp).toLocaleString()
+              : 'Tidak tersedia'
+          }}
+        </strong>
+      </template>
     </div>
 
     <!-- Kanban Columns -->
@@ -133,11 +146,23 @@ import axios from 'axios'
 import NavGroup from '@/components/NavGroup.vue'
 import { useRouter } from 'vue-router'
 import TableClosedStat from '@/components/TableClosedStat.vue'
-import { env } from 'process'
 
 const router = useRouter()
 const dataFad = ref([])
 const closed = ref('closed')
+const lastUpdateData = ref()
+
+const lastUpdate = async () => {
+  try {
+    const response = await axios.get('/api/v1/get-log-update')
+    if (response.status === 200) {
+      lastUpdateData.value = response.data
+      console.log('Last Update:', lastUpdateData.value.lastUpdate.timestamp) // Cek apakah data sudah benar
+    }
+  } catch (error) {
+    console.error('Terjadi kesalahan saat mengambil data:', error)
+  }
+}
 
 // Menyimpan state apakah accordion status terbuka atau tidak
 const accordionState = ref({
@@ -250,6 +275,7 @@ const openUserGuide = () => {
 // Ambil data saat komponen dimuat
 onMounted(() => {
   getData()
+  lastUpdate()
 })
 </script>
 

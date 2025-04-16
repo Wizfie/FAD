@@ -1,7 +1,7 @@
 import 'module-alias/register.js'
 import express from 'express'
 import bodyParser from 'body-parser'
-import cors from 'cors' // Mengimpor CORS
+import cors from 'cors'
 import path from 'path'
 import fs from 'fs'
 import dataRoutes from '../server/routes/dataRoutes.js'
@@ -24,7 +24,7 @@ const corsOptions = {
       callback(new Error('CORS not allowed'), false)
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type'],
 }
 
@@ -33,8 +33,6 @@ app.use(cors(corsOptions))
 
 app.use(bodyParser.json()) // Middleware untuk parsing JSON
 app.use(express.json()) // Middleware untuk parsing JSON
-
-// Endpoint untuk testing
 
 const folderPath = 'C:\\MyLocal\\Data\\DataFad'
 const filePathGuide = path.join(folderPath, 'Guide.pdf')

@@ -1,39 +1,37 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid' // Import UUID
+import dotenv from 'dotenv'
 
-const folderPath = 'C:\\MyLocal\\Data\\DataFad'
+dotenv.config()
 
-const filePath = path.join(folderPath, 'dataFad.json')
+const filePath = process.env.DATA_FAD_PATH
+const dataVendor = process.env.DATA_VENDOR_PATH
+
+const ensureFolderAndFile = async (filePath, defaultContent = '[]') => {
+  try {
+    // Mengecek apakah file ada
+    await fs.access(filePath)
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      // Jika file tidak ditemukan, buat folder dan file baru
+      console.log(`File tidak ditemukan, membuat file baru: ${filePath}`)
+      const folder = path.dirname(filePath)
+      await fs.mkdir(folder, { recursive: true })
+      await fs.writeFile(filePath, defaultContent) // Inisialisasi file dengan konten default
+    } else {
+      throw e // Tangani error lainnya
+    }
+  }
+}
 
 // Simpan file ke JSON
 const saveDataFad = async (formData) => {
   try {
-    let jsonData = []
+    await ensureFolderAndFile(filePath) // Pastikan folder dan file ada
 
-    try {
-      // Mengecek apakah file ada
-      await fs.access(filePath)
-
-      const data = await fs.readFile(filePath, 'utf8')
-
-      // Jika data kosong, langsung inisialisasi jsonData dengan array kosong
-      if (data.trim() === '') {
-        console.log('File kosong, membuat file baru')
-        jsonData = [] // File kosong, buat array kosong
-      } else {
-        // Parse JSON jika data ada
-        jsonData = JSON.parse(data)
-      }
-    } catch (e) {
-      if (e.code === 'ENOENT') {
-        console.log('File tidak ditemukan, membuat file baru')
-        await fs.mkdir(folderPath, { recursive: true })
-        jsonData = [] // Jika file tidak ditemukan, inisialisasi dengan array kosong
-      } else {
-        throw e // Tangani error lainnya
-      }
-    }
+    const data = await fs.readFile(filePath, 'utf8')
+    const jsonData = data.trim() === '' ? [] : JSON.parse(data)
 
     // Menambahkan UUID sebagai ID untuk data baru
     const newData = { ...formData, id: uuidv4() }
@@ -50,28 +48,11 @@ const saveDataFad = async (formData) => {
 // Membaca data dari file JSON
 const readDataFad = async () => {
   try {
-    // Mengecek apakah file ada
-    await fs.access(filePath)
+    await ensureFolderAndFile(filePath) // Pastikan folder dan file ada
 
-    // Membaca file
     const data = await fs.readFile(filePath, 'utf8')
-
-    // Jika data kosong, langsung kembalikan array kosong
-    if (data.trim() === '') {
-      console.log('File kosong, mengembalikan array kosong')
-      return []
-    }
-
-    // Parsing data JSON dan mengembalikan
-    return JSON.parse(data)
+    return data.trim() === '' ? [] : JSON.parse(data)
   } catch (e) {
-    if (e.code === 'ENOENT') {
-      // Jika file tidak ditemukan, buat file baru dan kembalikan array kosong
-      console.log('File tidak ditemukan, membuat file baru')
-      await fs.mkdir(folderPath, { recursive: true })
-      return []
-    }
-    // Menangani error lainnya
     console.log('Gagal membaca data', e)
     throw e
   }
@@ -113,4 +94,79 @@ const deleteDataFad = async (id) => {
   }
 }
 
-export { saveDataFad, readDataFad, updateDataFad, deleteDataFad }
+// Simpan data vendor
+const saveDataVendor = async (formData) => {
+  try {
+    await ensureFolderAndFile(dataVendor) // Pastikan folder dan file ada
+
+    const data = await fs.readFile(dataVendor, 'utf8')
+    const jsonData = data.trim() === '' ? [] : JSON.parse(data)
+
+    // Menambahkan UUID sebagai ID untuk data baru
+    const newData = { ...formData, id: uuidv4() }
+    jsonData.push(newData) // Menambahkan data baru ke array
+
+    // Menulis kembali data yang sudah diupdate ke file JSON
+    await fs.writeFile(dataVendor, JSON.stringify(jsonData, null, 2))
+    console.log('Data berhasil disimpan')
+  } catch (e) {
+    console.log('Gagal menyimpan data vendor', e)
+  }
+}
+
+const readDataVendor = async () => {
+  try {
+    await ensureFolderAndFile(dataVendor)
+    const data = await fs.readFile(dataVendor, 'utf8')
+
+    return data.trim() === '' ? [] : JSON.parse(data)
+  } catch (e) {
+    console.log('Gagal membaca data vendor', e)
+    throw e
+  }
+}
+
+const updateDataVendor = async (id, updatedData) => {
+  try {
+    const jsonData = await readDataVendor()
+    const index = jsonData.findIndex((item) => item.id === id)
+    if (index === -1) {
+      throw new Error('Data tidak ditemukan')
+    }
+    jsonData[index] = { ...jsonData[index], ...updatedData }
+    await fs.writeFile(dataVendor, JSON.stringify(jsonData, null, 2))
+    console.log('Data vendor berhasil diperbarui')
+    return { message: 'Data vendor berhasil diperbarui', data: jsonData[index] }
+  } catch (e) {
+    console.log('Gagal memperbarui data vendor', e)
+    throw new Error('Gagal memperbarui data vendor')
+  }
+}
+
+const deleteDataVendor = async (id) => {
+  try {
+    const jsonData = await readDataVendor()
+    const index = jsonData.findIndex((item) => item.id === id)
+    if (index === -1) {
+      throw new Error('Data tidak ditemukan')
+    }
+    const deletedData = jsonData.splice(index, 1)
+    await fs.writeFile(dataVendor, JSON.stringify(jsonData, null, 2))
+    console.log('Data vendor berhasil dihapus')
+    return { message: 'Data vendor berhasil dihapus', data: deletedData }
+  } catch (e) {
+    console.log('Gagal menghapus data vendor', e)
+    throw new Error('Gagal menghapus data vendor')
+  }
+}
+
+export {
+  saveDataFad,
+  readDataFad,
+  updateDataFad,
+  deleteDataFad,
+  saveDataVendor,
+  readDataVendor,
+  updateDataVendor,
+  deleteDataVendor,
+}

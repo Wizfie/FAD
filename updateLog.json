@@ -1,0 +1,20 @@
+[
+  {
+    "action": "UPDATE",
+    "id": "e49f4245-7701-413b-9b6c-3ce498a97b99",
+    "timestamp": "2025-04-15T04:19:32.516Z",
+    "description": "Data FAD dengan ID e49f4245-7701-413b-9b6c-3ce498a97b99 berhasil diperbarui."
+  },
+  {
+    "action": "UPDATE",
+    "id": "2d651de8-241b-47d3-868f-552b461f61bc",
+    "timestamp": "2025-04-15T04:49:32.284Z",
+    "description": "Data FAD dengan ID 2d651de8-241b-47d3-868f-552b461f61bc berhasil diperbarui."
+  },
+  {
+    "action": "UPDATE",
+    "id": "e49f4245-7701-413b-9b6c-3ce498a97b99",
+    "timestamp": "2025-04-15T07:00:51.925Z",
+    "description": "Data FAD dengan ID e49f4245-7701-413b-9b6c-3ce498a97b99 berhasil diperbarui."
+  }
+]

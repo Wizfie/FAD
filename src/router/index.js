@@ -33,6 +33,11 @@ const router = createRouter({
       name: 'ClosedView',
       component: () => import('@/views/ClosedFad.vue'),
     },
+    {
+      path: '/vendor',
+      name: 'vendor',
+      component: () => import('@/views/Vendor.vue'),
+    },
   ],
 })
 
