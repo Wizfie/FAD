@@ -188,6 +188,7 @@ const getData = async () => {
         plant: item.plant,
         terimaFad: item.terimaFad,
         terimaBbm: item.terimaBbm,
+        bast: item.bast,
         vendor: item.vendor,
         status: item.status,
         deskripsi: item.deskripsi,

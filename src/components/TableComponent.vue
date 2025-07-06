@@ -10,14 +10,14 @@
                   v-for="(header, index) in headers"
                   :key="index"
                   scope="col"
-                  class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                  class="py-3.5 px-4 text-sm font-normal text-gray-500 dark:text-gray-400"
                 >
                   <span>{{ header }}</span>
                 </th>
                 <!-- Menambahkan header Action jika showAction true -->
                 <th
                   v-if="showAction"
-                  class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                  class="py-3.5 px-4 text-sm font-normal text-gray-500 dark:text-gray-400"
                 >
                   Action
                 </th>
@@ -33,8 +33,11 @@
                   v-for="(value, key) in row"
                   :key="key"
                   v-show="key !== 'id'"
-                  class="px-4 py-4 text-sm text-wrap"
+                  class="px-3 py-4 text-xs text-wrap center dark:text-white"
                   :class="{
+                    'w-32 whitespace-nowrap text-center':
+                      key === 'terimaFad' || key === 'terimaBbm' || key === 'bast',
+                    'text-xs': key === 'terimaFad' || key === 'terimaBbm' || key === 'bast',
                     'bg-green-100 text-black  dark:text-green-300  dark:bg-transparent':
                       key === 'status' && value.toLowerCase() === 'open',
                     'bg-yellow-100 text-black dark:text-yellow-300 dark:bg-transparent':
@@ -44,7 +47,7 @@
                     'text-black dark:text-white': key !== 'status',
                   }"
                 >
-                  <div>{{ value ? value : '-' }}</div>
+                  <div class="w-30">{{ value ? value : '-' }}</div>
                 </td>
 
                 <td v-if="showAction" class="px-4 py-4 text-sm whitespace-nowrap">

@@ -13,7 +13,7 @@
       </div>
 
       <div class="flex flex-wrap items-center mt-4 gap-2 sm:gap-4">
-        <button
+        <!-- <button
           class="flex items-center justify-center w-full px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700"
         >
           <svg
@@ -39,7 +39,7 @@
             </defs>
           </svg>
           <span>Export</span>
-        </button>
+        </button> -->
 
         <button
           @click="toggleForm"
@@ -230,6 +230,7 @@ const filteredData = computed(() => {
       item.item.toLowerCase(),
       item.terimaFad.toLowerCase(),
       item.terimaBbm.toLowerCase(),
+      item.bast.toLowerCase(),
       item.vendor.toLowerCase(),
       item.status.toLowerCase(),
       item.deskripsi.toLowerCase(),
@@ -299,6 +300,7 @@ const headers = [
   'Plant',
   'Terima FAD',
   'Terima BBM',
+  'BAST',
   'Vendor',
   'Status',
   'Deskripsi',
@@ -348,6 +350,7 @@ const getData = async () => {
         plant: item.plant,
         terimaFad: item.terimaFad,
         terimaBbm: item.terimaBbm,
+        bast: item.bast,
         vendor: item.vendor,
         status: item.status,
         deskripsi: item.deskripsi,
