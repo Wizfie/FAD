@@ -123,7 +123,7 @@ const isDate = (str) => {
 const filteredData = computed(() => {
   // Jika tidak ada query pencarian, hanya tampilkan data dengan status 'OnProgress'
   if (!searchQuery.value) {
-    return dataFad.value.filter((item) => item.status.toLowerCase() === progress.value)
+    return dataFad.value.filter((item) => (item.status || '').toLowerCase() === progress.value)
   }
 
   const query = searchQuery.value.toLowerCase()
@@ -141,28 +141,28 @@ const filteredData = computed(() => {
 
   // Jika input adalah angka, hanya filter berdasarkan kolom noFad
   if (isNumber(query)) {
-    return dataFad.value.filter((item) => item.noFad.toString().includes(query))
+    return dataFad.value.filter((item) => (item.noFad || '').toString().includes(query))
   }
 
   // Filter berdasarkan teks di semua kolom
   return dataFad.value.filter((item) => {
     const matchedFields = [
-      item.noFad.toLowerCase(),
-      item.plant.toLowerCase(),
-      item.item.toLowerCase(),
-      item.terimaFad.toLowerCase(),
-      item.terimaBbm.toLowerCase(),
-      item.bast.toLowerCase(),
-      item.vendor.toLowerCase(),
-      item.status.toLowerCase(),
-      item.deskripsi.toLowerCase(),
-      item.keterangan.toLowerCase(),
+      (item.noFad || '').toString().toLowerCase(),
+      (item.plant || '').toLowerCase(),
+      (item.item || '').toLowerCase(),
+      (item.terimaFad || '').toLowerCase(),
+      (item.terimaBbm || '').toLowerCase(),
+      (item.bast || '').toLowerCase(),
+      (item.vendor || '').toLowerCase(),
+      (item.status || '').toLowerCase(),
+      (item.deskripsi || '').toLowerCase(),
+      (item.keterangan || '').toLowerCase(),
     ]
 
     // Jika ada kecocokan pada salah satu kolom, return item ini
     return (
       matchedFields.some((field) => field.includes(query)) &&
-      item.status.toLowerCase() === progress.value
+      (item.status || '').toLowerCase() === progress.value
     )
   })
 })
@@ -188,7 +188,7 @@ const headers = [
   'Plant',
   'Terima FAD',
   'Terima BBM',
-  'BAST',
+  'Tanggal Serah Terima',
   'Vendor',
   'Status',
   'Deskripsi',

@@ -180,7 +180,7 @@ const headers = [
   'Plant',
   'Terima FAD',
   'Terima BBM',
-  'BAST',
+  'Tanggal Serah Terima',
   'Vendor',
   'Status',
   'Deskripsi',
