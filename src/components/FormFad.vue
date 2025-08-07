@@ -201,7 +201,19 @@ const props = defineProps({
 
   isEditMode: Boolean,
 })
-const form = ref({ ...props.initData })
+const form = ref({
+  noFad: props.initData.noFad || '',
+  item: props.initData.item || '',
+  plant: props.initData.plant || '',
+  terimaFad: props.initData.terimaFad || '',
+  terimaBbm: props.initData.terimaBbm || '',
+  bast: props.initData.bast || '',
+  vendor: props.initData.vendor || '',
+  status: props.initData.status || '',
+  deskripsi: props.initData.deskripsi || '',
+  keterangan: props.initData.keterangan || '',
+  id: props.initData.id || '',
+})
 const resetForm = () => {
   form.value = {
     noFad: '',

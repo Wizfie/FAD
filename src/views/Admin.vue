@@ -248,6 +248,7 @@ const inputData = ref({
   plant: '',
   terimaFad: '',
   terimaBbm: '',
+  bast: '',
   vendor: '',
   status: '',
   deskripsi: '',
